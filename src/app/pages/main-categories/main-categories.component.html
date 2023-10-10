@@ -1,0 +1,12 @@
+<h2 >
+  <a class="px-1 px-4 text-success" routerLink="/categories">Categories</a>
+</h2>
+<owl-carousel-o [options]="customOptions" class="w-100" >
+  <ng-container *ngFor="let slide of allCategories">
+    <ng-template carouselSlide>
+      <img height="300" [src]="slide.image" >
+    <h3>{{slide.name}}</h3>
+    </ng-template>
+  </ng-container>
+
+</owl-carousel-o>

@@ -1,0 +1,9 @@
+<div class="container">
+  <input [(ngModel)]="searchKey" placeholder="Search..." autocomplete="off" type="text" class="form-control w-50 mx-auto my-5 border-1">
+    <div class="row">
+      <!--Products for loop  -->
+    <div *ngFor="let product of allProduct | searchPipe : searchKey" class="col-md-2">
+      <app-product-item [product]="product"></app-product-item>
+    </div>
+    </div>
+</div>

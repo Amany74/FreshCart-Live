@@ -1,0 +1,46 @@
+<div class="container my-5">
+  <h2>Login</h2>
+
+<!-- Error on load -->
+<div *ngIf="errorMessage" class="d-flex alert alert-warning">
+  <h4  class="d-inline text-danger">
+    {{ errorMessage }}
+  </h4>
+</div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" >
+
+
+
+    <label for="email">Email</label>
+    <input type="email" class="form-control mb-4" placeholder="Email"id="email" formControlName="email">
+
+    <div *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || isNotValidForm) " class="alert alert-danger">
+      <p *ngIf="loginForm.get('email')?.getError('required')">Email is required</p>
+      <p *ngIf="loginForm.get('email')?.getError('email')">Email Error</p>
+    </div>
+
+
+    <label for="password">Password</label>
+    <input type="password" class="form-control mb-4" placeholder="Password" id="password" formControlName="password">
+
+
+    <div *ngIf="loginForm.get('password')?.errors && (loginForm.get('password')?.touched || isNotValidForm) " class="alert alert-danger">
+      <p *ngIf="loginForm.get('password')?.getError('required')">Password is required</p>
+      <p *ngIf="loginForm.get('password')?.getError('pattern')">Password Pattern Wrong
+<span><small>(Start with capital letter , 8 Characters long)</small></span>
+
+      </p>
+    </div>
+
+
+
+  <button  [disabled]="loginForm.invalid"  class="btn bg-main text-white d-block ms-auto">
+    <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+    <span *ngIf="!isLoading">Login</span>
+  </button>
+
+  
+  </form>
+</div>
+

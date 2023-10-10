@@ -1,0 +1,25 @@
+<div class="w-75 mx-auto py-5 px-1">
+  <form [formGroup]="shippingAddress" (ngSubmit)="handleOnline()">
+    <label for="detials">Detials</label>
+    <input placeholder="123 at root ..." type="text" formControlName="detials" id="detials" class="form-control mb-4">
+    <div *ngIf="shippingAddress.get('detials')?.errors && (shippingAddress.get('detials')?.touched)" class="alert alert-danger">
+      <p *ngIf="shippingAddress.get('detials')?.getError('required')" class="mb-0">Detials is reqired</p>
+    </div>
+    <label for="Phone">Phone:</label>
+    <input placeholder="ex 0125.." type="tel" formControlName="phone" class="form-control mb-4">
+    <div *ngIf="shippingAddress.get('phone')?.errors &&( shippingAddress.get('phone')?.touched )" class="alert alert-danger">
+      <p *ngIf="shippingAddress.get('phone')?.getError('required')" class="mb-0">Phone required</p>
+      <p *ngIf="shippingAddress.get('phone')?.getError('minlength')" class="mb-0">Phone minimum length is 10 </p>
+      <p *ngIf="shippingAddress.get('phone')?.getError('maxlength')" class="mb-0">Phone maximum length is 13</p>
+    </div>
+
+    <label for="city">City</label>
+    <input placeholder="ex alexandria" type="text" formControlName="city" class="form-control mb-4" id="city">
+    <div *ngIf="shippingAddress.get('city')?.errors && (shippingAddress.get('city')?.touched)" class="alert alert-danger">
+      <p *ngIf="shippingAddress.get('city')?.getError('required')" class="mb-0">City is reqired</p>
+    </div>
+
+
+    <button  class="btn btn-warning text-white w-100 h2">Pay</button>
+    </form>
+</div>

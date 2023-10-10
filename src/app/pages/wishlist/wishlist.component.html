@@ -1,0 +1,33 @@
+
+<div class="rounded-3 p-3 w-100 " *ngIf="WishDetails?.data">
+  <div class="card p-4 d-flex justify-content-between m-1">
+    <h4 class="text-success px-1">
+      Number of items in Wishlist :
+      <span>{{WishDetails.count}}</span>
+    </h4>
+  </div>
+  <div class="row border-bottom m-1 card cust-bg p-2" *ngFor="let item of WishDetails.data">
+    <div class="col-md-1">
+      <img [src]="item.imageCover" alt="" class="w-100" />
+    </div>
+
+    <div class="col-md-9">
+      <div class="item">
+        <h4>{{ item.title }}</h4>
+        <p class="quatreColor fw-bold mb-0">
+          {{ item.category.name }}
+        </p>
+        <p class="mb-0"> <i class="rating-color fa fa-star pt-2 mb-0"></i>
+          {{item.ratingsAverage}}</p>
+        <div class="d-flex align-items-center mb-3">
+          <p class="fw-bold mb-0">{{item.price }}</p>
+
+          <button (click)="deleteProductFromWish(item.id)" class="text-danger btn remove remove-btn">
+            <i class="fa-regular fa-trash-can"></i> Remove
+          </button>
+        </div>
+        <button (click)="addToCartFromWish(item.id)" class="btn bg-main mb-2 mt-3 px-2 text-white">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>

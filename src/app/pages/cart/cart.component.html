@@ -1,0 +1,59 @@
+
+<div *ngIf="loading"  class="d-flex justify-content-center align-items-center w-100 h-80">
+  <div class="custom-append">
+    <i class="fa fa-spinner fa-spin fs-1"></i>
+  </div>
+  </div>
+
+  <div class="custom-append bg-main-light m-5 rounded-3 p-3 cinqFont" *ngIf="cartDetails?.data">
+    <h2>Cart Details:</h2>
+    <div class="row border-bottom m-1" *ngFor="let product of cartDetails.data.products | filterProducts">
+      <div class="col-md-1">
+        <img [src]="product.product.imageCover" alt="" class="w-100" />
+      </div>
+
+      <div class="col-md-9">
+        <div class="item">
+          <h4>{{ product.product.title }}</h4>
+          <p class="quatreColor fw-bold mb-0">
+            {{ product.product.category.name }}
+          </p>
+          <div class="d-flex align-items-center mb-3">
+            <p class="fw-bold mb-0">{{ product.price | currency }}</p>
+            <button (click)="deleteItem(product.product.id)" class="text-danger btn remove remove-btn">
+              <i class="fa-regular fa-trash-can"></i> Remove
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-update border-success" (click)="updateProductCount(product.count - 1, product.product.id)">
+          -
+        </button>
+        <span class="mx-2">{{ product.count }}</span>
+        <button class="btn btn-update border-success" (click)="updateProductCount(product.count + 1, product.product.id)">
+          +
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between m-4">
+      <h6>
+        Number of items:
+        <span class="quatreColor">{{ cartItems }}</span>
+      </h6>
+      <h6>
+        Total price:
+        <span class="quatreColor">{{ cartDetails.data.totalCartPrice }}</span>
+      </h6>
+    </div>
+    <div class="d-flex justify-content-center m-3">
+    <button  *ngIf="cartItems != 0" class="btn bg-main check-out">
+        <a class="text-white"[routerLink]="['/checkout/',cartDetails.data._id]">Proceed to checkout</a>
+      </button>
+      <button (click)="NavigateToHome()"
+              class="mx-2 btn text-dark btn-outline-success">
+            Products
+      </button>
+    </div>
+  </div>
